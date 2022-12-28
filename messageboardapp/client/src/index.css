@@ -1,0 +1,356 @@
+* {
+    border-radius: 4px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    background-color: pink
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Open+Sans&display=swap');
+
+/* general elements */
+input {
+    padding: 5px;
+    margin: 7px;
+    background-color: whitesmoke;
+}
+
+button {
+    padding: 5px;
+    margin: 7px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.header{
+    font-family: 'Dela Gothic One', cursive;
+}
+
+/* navbar */
+.navbar {
+    border: solid black 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: none;
+    text-transform: none;
+    background-color: whitesmoke;
+}
+
+.navbar > .link {
+    margin: 20px;
+    text-decoration: none; 
+    color: navy;
+    font-weight: 900;
+    background-color: transparent;
+}
+
+/* auth */
+.app {
+    text-align: center;
+    border: 2px black solid;
+    padding: 15px;
+    display: block;
+}
+
+/* fix centering of current member button */
+.authContainer {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    justify-self: center;
+    margin: 0;
+}
+
+/* post form */
+.postForm {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.postForm > input {
+    align-self: center;
+    width: 300px;
+}
+
+.postForm > textarea {
+    align-self: center;
+    width: 30%;
+    flex-basis: 135px;
+    flex-grow: 150px;
+    padding: 8px;
+    background-color: whitesmoke;
+    resize: none;
+}
+
+.postForm > button {
+    align-self: center;
+    border: black solid 1px;
+    background-color: whitesmoke;
+    cursor: pointer;
+    margin: 30px;
+}
+
+/* post view bar style */
+.sortViewBar{
+    justify-content: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 3%;
+    width: auto;
+    height: auto;
+}
+
+.sortViewBar > button {
+    background-color: rgb(247, 183, 183);
+    padding: 8px;
+    color: whitesmoke;
+    border: none;
+    cursor: pointer;
+}
+
+/* post list */
+.postList {
+    display: grid;
+    align-content: center;
+    row-gap: 80px;
+    /* justify-content: space-around; */
+}
+
+.postList > button {
+    width: 90px;
+    height: 30px;
+    justify-self: center;
+}
+
+.postList > h3 {
+    align-self: center;
+}
+
+.postList > h5 {
+    align-self: center;
+    cursor: pointer;
+    padding: 6px;
+}
+
+/* posts */
+.postStyle {
+    justify-self: center;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    border: solid rgb(233, 110, 110) 2px;
+    max-height: auto;
+    width: 93%;
+    text-overflow: ellipsis;
+    padding: 8px;
+}
+
+.postStyle > a > img{
+    width: 275px;
+    z-index: 0;
+    border-radius: 0;
+}
+
+.postStyle > a > img:hover {
+    width: 475px;
+    border-radius: 0;
+}
+
+.postDesc {
+    grid-column: 2/4;
+    margin-left: 10px;
+}
+
+div.postDesc > Link > h3 {
+    grid-column: 1/4;
+    grid-row: 1;
+    height: 90px;
+    max-width: 50%;
+}
+
+.postDesc > Link > h3 > span.date {
+    font-size: 120px;
+    background-color: transparent;
+}
+
+div.postDesc > p {
+    border-radius: 0;
+    text-align: left;
+    grid-row: 2/3;
+    width: auto;
+    height: auto;
+    background-color: rgba(255, 155, 155, 0.473);
+}
+
+.postDesc > a {
+    text-align: right;
+    text-justify: right;
+    grid-column: 1/3;
+    background-color: transparent;
+    z-index: 1;
+}
+
+.postDesc > p, h6 {
+    border-radius: 0;
+    padding: 5px;
+    width: 80px;
+    z-index: 1;
+    color: rgb(59, 59, 59);
+}
+
+.postDesc > h6 {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.postDesc > h4 {
+    text-align: left;
+    z-index: 1;
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.postDesc > h4 , i {
+    color: rgb(255, 155, 155);
+    font-size: 18px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 0
+}
+
+.postDesc > h4 {
+    color: white;
+    border: solid 1px rgb(255, 155, 155);
+    max-width: 106px;
+    height: 35px;
+    padding: 12px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
+}
+
+/* profile posts */
+div.profilePosts {
+    margin-bottom: 80px;
+}
+
+
+
+/* interaction bar */
+.interactionStyle {
+    background-color: rgba(255, 155, 155, 0.473);
+    grid-column: 1/4;
+    grid-row: 4;
+    /*  */
+    justify-self: right;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: 1fr auto;
+    /*  */
+    width: auto;
+    height: auto;
+}
+
+/* set grid layout of elements in interaction bar */
+.interactionStyle > h4 {
+    color: rgb(233, 110, 110)
+}
+
+.interactionStyle > h6.comments {
+    grid-column: 2;
+    background-color: transparent;
+}
+
+.interactionStyle > h6 {
+    height: 15px;
+    color: rgb(233, 110, 110)
+}
+
+.interactionStyle > h6.viewFullBtn {
+    grid-column: 4;
+    grid-row: 1;
+}
+
+.interactionStyle > h6.replyBtn {
+    grid-column: 5;
+    grid-row: 1;
+}
+
+.interactionStyle > div.commentAreaStyle {
+    width: 70%;
+    max-height: auto;
+    grid-column: 3/4;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: 1fr 1fr;
+    background-color: transparent;
+}
+
+div.interactionStyle > button.deleteBtn {
+    align-self: center;
+    justify-self: center;
+    border: solid oldlace 2px;
+    color: oldlace;
+    cursor: pointer;
+    width: 65px;
+    height: 40px;
+    grid-column: 5;
+    border-radius: 0px;
+    background-color: rgb(233, 110, 110);
+    box-shadow: none;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+/* reply */
+/* commentArea elements */
+.interactionStyle > div.commentAreaStyle > button {
+    border: solid rgb(255, 155, 155) 1px;
+    width: auto;
+    height: 50px;
+    color: rgb(233, 110, 110);
+    grid-column: 5;
+}
+
+.interactionStyle > div.commentAreaStyle > textarea {
+    width: 300px;
+    height: 80px;
+    margin: 10px;
+    resize: none;
+    border: rgb(233, 110, 110) solid 2px;
+    margin-bottom: -100px;
+    grid-column: 4;
+}
+
+/* comments style */
+.commentContainer {
+    grid-column: auto;
+    background-color: white;
+    height: auto;
+    width: auto;
+    border-radius: 0;
+}
+
+div.commentStyle {
+    grid-row: 2;
+    background-color: transparent;
+}
+
+div.commentStyle > h6 {
+    text-align: right;
+    text-justify: right;
+    background-color: transparent;
+    height: auto;
+    width: auto;
+}
+
+section.postsGrid {
+    /* text-align: -webkit-center; */
+    /* text-align: center; */
+}
+
+section.commentsGrid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
