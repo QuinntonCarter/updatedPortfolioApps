@@ -1,2 +1,2 @@
 # updatedPortfolioApps
-Updated for 2023
+Updated portfolio projects for 2023
