@@ -1,26 +1,37 @@
-// add border and flesh out component
+// **fix: add border and flesh out component
 import { useContext } from "react";
 import { AppContext } from "./context/AppProvider";
 
 // only delete comment if authId and user._id match
-export default function Comment({ date, content, author, deleteable, postId, commentId }){
+export default function Comment({
+        date,
+        content,
+        author,
+        userIsAuthor,
+        postId,
+        commentId,
+        setPostComments
+    }){
     const {
         deleteComment,
+        setAppError
     } = useContext(AppContext);
 
-    function validateDeletion(postId, commId){
-        if (deleteable) {
-            return deleteComment(postId, commId)
+    async function validateDeletion(postId, commentId) {
+        if (userIsAuthor) {
+            await deleteComment(postId, commentId)
+                .then(data => setPostComments(data))
+                .catch(error => setAppError(error));
         } else {
-            return new Error(`Error: cannot delete, this isn't your comment`)
+            return setAppError(`Error: cannot delete, this isn't your comment`);
         }
     };
 
-    const canDeleteComment = deleteable &&
+    const canDeleteComment = userIsAuthor &&
             <button
                 onClick={() => validateDeletion(postId, commentId)}
                 className='deleteBtn'
-            > x </button>
+            > Delete Comment </button>;
 
     return (
         <div className="comment" style={{ display: 'grid', justifySelf: 'center' }}>

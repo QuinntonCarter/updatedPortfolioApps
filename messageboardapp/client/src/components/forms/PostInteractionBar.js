@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { UserContext } from '../context/UserProvider.js';
 import { AppContext } from '../context/AppProvider.js';
 import CommentList from '../CommentList.js';
@@ -11,18 +11,15 @@ export default function PostInteractionBar({
         _userId,
         userString,
         voted,
-        userId
     }){
     
     const { 
-        user
+        user,
     } = useContext(UserContext);
 
     const {
-        deleteComment,
         submitVote,
         postComment,
-        appError,
         setAppError,
     } = useContext(AppContext);
     
@@ -32,11 +29,12 @@ export default function PostInteractionBar({
         _authId: ``,
         date: new Date()
     };
-
+    
     const [ inputs, setInputs ] = useState(initInputs);
     const [ toggleReply, setToggleReply ] = useState(false);
-
-    const isCommentAuthor = userId === user._id;
+    const numberOfComments = comments && comments.length;
+    const currentUserHasVoted = voted.includes(userString);
+    const isCurrentUsersPost = _userId === user._id;
 
     function handleChange(e){
         const { name, value } = e.target
@@ -46,12 +44,13 @@ export default function PostInteractionBar({
         }))
     };
     
-    function voteValidation(vote, userId, id, username){
-        const userHasVoted = voted.includes(username);
-        if (userHasVoted) {
+    function voteValidation(vote, id){
+        if (currentUserHasVoted) {
             setAppError(`Error: you've already voted here`)
+        } if (isCurrentUsersPost) {
+            setAppError(`Error: You can't vote on your own post`)
         } else {
-            submitVote(vote, userId, id)
+            submitVote(vote, _userId, id)
         }
     };
 
@@ -64,28 +63,19 @@ export default function PostInteractionBar({
         await setToggleReply(false);
     };
 
-    function handleDelete(postId, id) {
-        deleteComment(postId, id)
-            .then(data => console.log(data))
-            .catch(error => setAppError(error));
-    };
-
-    useEffect(() => {
-        console.log(comments)
-    }, [comments]);
-
     return (
         <div className='interactionStyle'>
             <h4 title='# of votes'>
                 <i
-                    onClick={() => voteValidation("upvote", _userId, _id, user.username)}
+                    onClick={() => voteValidation("upvote", _id)}
+                    // **fix: refactor so it's more readable/eliminate 'already voted' bug
                     title={ userString === user.username ? 'cannot vote on your own content' : 'upvote' || voted.includes(user.username) ? `you've already voted` : `upvote` } className='fas fa-thumbs-up'/>
                 {votes}
                 <i
-                    onClick={() => voteValidation("downvote", _userId, _id, user.username)}
+                    onClick={() => voteValidation("downvote", _id)}
                     title={ userString === user.username ? 'cannot vote on your own content' : 'downvote' || voted.includes(user.username) ? `you've already voted` : `downvote` } className='fas fa-thumbs-down'/>
             </h4>
-            <h6 className='comments'> { comments.length } comments </h6>
+            <h6 className='comments'> { numberOfComments } comments </h6>
             { !toggleReply ?
                 <h6
                     title='open reply form'
@@ -107,7 +97,7 @@ export default function PostInteractionBar({
                         />
                         <button
                             onClick={(e) => submitComment(e, _id)}
-                            style={{color: 'rgb(233, 110, 110)'}}
+                            style={{color: 'rgb(55, 102, 255)'}}
                         > reply </button>
                         <button
                             onClick={
@@ -117,15 +107,10 @@ export default function PostInteractionBar({
                     </form>
                 </div>
             }
-            { isCommentAuthor &&
-                <button
-                    onClick={() => handleDelete(_id)}
-                    className='deleteBtn'
-                > delete </button>
-            }
             <CommentList
                 postId={_id}
                 comments={comments}
+                setPostComments={setPostComments}
                 key={_id}
             />
         </div>

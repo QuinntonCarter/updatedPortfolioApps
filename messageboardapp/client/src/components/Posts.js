@@ -34,7 +34,7 @@ export default function Posts({
                 </a>
                     <div className='postDesc'>
                         <Link to={`/posts/${_id}`}
-                            style={{color: 'rgb(233, 110, 110)', fontSize: '12px'}}>
+                            style={{color: 'rgb(55, 102, 255)', fontSize: '12px'}}>
                             <h3> { title } <br/>
                                 <span className='date'> {`>>${userString}`} on { posted.slice(0,10) } </span> 
                                 <span className='date'> @ { posted.slice(11,16) } </span> 

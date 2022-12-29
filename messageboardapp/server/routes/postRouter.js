@@ -39,7 +39,7 @@ postRouter.post("/", (req, res, next) => {
 })
 
 // DELETE post
-postRouter.delete(`/delete`, (req, res, next) => {
+postRouter.delete("/delete", (req, res, next) => {
     Post.findOneAndDelete(
         { _id: req.query.postId, user: req.user._id },
         (err, deletedPost) => {

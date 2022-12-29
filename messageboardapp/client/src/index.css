@@ -2,7 +2,8 @@
     border-radius: 4px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 500;
-    background-color: pink
+    background-color: rgb(88, 169, 255);
+    color: black;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Open+Sans&display=swap');
@@ -17,7 +18,7 @@ input {
 button {
     padding: 5px;
     margin: 7px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 0px 1px rgba(208, 208, 208, 0.476);
 }
 
 .header{
@@ -26,7 +27,7 @@ button {
 
 /* navbar */
 .navbar {
-    border: solid black 2px;
+    border: solid white 2px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -47,7 +48,7 @@ button {
 /* auth */
 .app {
     text-align: center;
-    border: 2px black solid;
+    border: 2px white solid;
     padding: 15px;
     display: block;
 }
@@ -86,7 +87,7 @@ button {
 
 .postForm > button {
     align-self: center;
-    border: black solid 1px;
+    border: white solid 1px;
     background-color: whitesmoke;
     cursor: pointer;
     margin: 30px;
@@ -103,7 +104,7 @@ button {
 }
 
 .sortViewBar > button {
-    background-color: rgb(247, 183, 183);
+    background-color: rgb(64, 145, 252);
     padding: 8px;
     color: whitesmoke;
     border: none;
@@ -140,7 +141,7 @@ button {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto auto auto auto;
-    border: solid rgb(233, 110, 110) 2px;
+    border: solid rgb(55, 102, 255) 2px;
     max-height: auto;
     width: 93%;
     text-overflow: ellipsis;
@@ -181,7 +182,7 @@ div.postDesc > p {
     grid-row: 2/3;
     width: auto;
     height: auto;
-    background-color: rgba(255, 155, 155, 0.473);
+    background-color: rgba(55, 102, 255, 0.375);
 }
 
 .postDesc > a {
@@ -197,7 +198,7 @@ div.postDesc > p {
     padding: 5px;
     width: 80px;
     z-index: 1;
-    color: rgb(59, 59, 59);
+    color: black;
 }
 
 .postDesc > h6 {
@@ -213,7 +214,7 @@ div.postDesc > p {
 }
 
 .postDesc > h4 , i {
-    color: rgb(255, 155, 155);
+    color: rgb(55, 102, 255);
     font-size: 18px;
     padding: 8px;
     cursor: pointer;
@@ -222,11 +223,11 @@ div.postDesc > p {
 
 .postDesc > h4 {
     color: white;
-    border: solid 1px rgb(255, 155, 155);
+    border: solid 1px rgb(55, 102, 255);
     max-width: 106px;
     height: 35px;
     padding: 12px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
+    box-shadow: 2px 2px 0px 1px rgba(231, 231, 231, 0.2)
 }
 
 /* profile posts */
@@ -238,7 +239,7 @@ div.profilePosts {
 
 /* interaction bar */
 .interactionStyle {
-    background-color: rgba(255, 155, 155, 0.473);
+    background-color: rgb(55, 102, 255);
     grid-column: 1/4;
     grid-row: 4;
     /*  */
@@ -253,7 +254,7 @@ div.profilePosts {
 
 /* set grid layout of elements in interaction bar */
 .interactionStyle > h4 {
-    color: rgb(233, 110, 110)
+    color: rgb(55, 102, 255)
 }
 
 .interactionStyle > h6.comments {
@@ -263,7 +264,8 @@ div.profilePosts {
 
 .interactionStyle > h6 {
     height: 15px;
-    color: rgb(233, 110, 110)
+    font-weight: 900;
+    color: white
 }
 
 .interactionStyle > h6.viewFullBtn {
@@ -297,7 +299,7 @@ div.interactionStyle > button.deleteBtn {
     height: 40px;
     grid-column: 5;
     border-radius: 0px;
-    background-color: rgb(233, 110, 110);
+    background-color: rgb(55, 102, 255);
     box-shadow: none;
     grid-column: 1;
     grid-row: 1;
@@ -306,10 +308,10 @@ div.interactionStyle > button.deleteBtn {
 /* reply */
 /* commentArea elements */
 .interactionStyle > div.commentAreaStyle > button {
-    border: solid rgb(255, 155, 155) 1px;
+    border: solid rgb(55, 102, 255) 1px;
     width: auto;
     height: 50px;
-    color: rgb(233, 110, 110);
+    color: rgb(55, 102, 255);
     grid-column: 5;
 }
 
@@ -318,7 +320,7 @@ div.interactionStyle > button.deleteBtn {
     height: 80px;
     margin: 10px;
     resize: none;
-    border: rgb(233, 110, 110) solid 2px;
+    border: rgb(55, 102, 255) solid 2px;
     margin-bottom: -100px;
     grid-column: 4;
 }

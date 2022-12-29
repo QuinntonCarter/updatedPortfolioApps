@@ -44,20 +44,37 @@ commentRouter.put(`/:postId`, (req, res, next) => {
     )
 })
 
-// DELETE comment **fix: need to return amended comment array **
+// DELETE comment: remove association with post **fix: need to return amended comment array **
 commentRouter.put(`/delete/:postId/:comId`, (req, res, next) => {
     const delCom = req.params.comId
-    Post.findOneAndUpdate (
+    Post.findOneAndUpdate(
         { _id: req.params.postId },
         { $pull: 
-            { comment: { _id: delCom } }
+            { comment: 
+                { _id: delCom } 
+            }
         },
+        { new: true },
         (err, postNoComment) => {
             if(err){
                 res.status(500)
                 return next(err)
             }
             return res.status(200).send(postNoComment)
+        }
+    )
+})
+
+// DELETE comment: remove comment from DB
+commentRouter.delete(`/delete/:comId`, (req, res, next) => {
+    Comment.findOneAndDelete(
+        { _id: req.params.comId, _authId: req.user._id  },
+        (err, deletedComment) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(200).send(`Successfully deleted comment: ${deletedComment._id}`)
         }
     )
 })

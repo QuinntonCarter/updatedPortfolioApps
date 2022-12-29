@@ -52,6 +52,10 @@ export default function Profile(){
         .catch(err => setAppError(err))
     }, []);
 
+    useEffect(() => {
+        
+    }, []);
+
     return(
         <div>
             <h1> @{ username } </h1>

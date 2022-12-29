@@ -8,11 +8,11 @@ export default function AppContextProvider({ children }){
     const {
         user,
         userState,
-        setUserState,
         userAxios,
         isLoading,
         setIsLoading
     } = useContext(UserContext);
+
     const [ posts, setPosts ] = useState({ userPosts: [], allPosts: [], foundPosts: [] });
     const [ comments, setComments ] = useState({ userComments: [], allComments: [], foundComments: [] });
     const [ appError, setAppError ] = useState();
@@ -28,7 +28,7 @@ export default function AppContextProvider({ children }){
             }));
             return data;
         } catch (error){
-            setAppError(error);
+            return setAppError(error);
         }
     };
 
@@ -46,7 +46,7 @@ export default function AppContextProvider({ children }){
             }));
             return data
         } catch (error) {
-            setAppError(error);
+            return setAppError(error);
         }
     };
 
@@ -61,7 +61,7 @@ export default function AppContextProvider({ children }){
             }));
             return data;
         } catch (error){
-            setAppError(error);
+            return setAppError(error);
         }
     };
 
@@ -80,23 +80,23 @@ export default function AppContextProvider({ children }){
             });
             return data;
         } catch (error) {
-            setAppError(error);
+            return setAppError(error);
         }
     }
 
     // voting functionality
-    function submitVote(vote, userId, postId){
-        // **fix: move this outside of function into a variable **
-        userId === user._id ?
-            setAppError('Error: this is your own post or comment')
-        :
-            userAxios.put(`/api/posts/${vote}/${postId}`)
-        .then(res => setPosts(prevState => [
-            ...prevState,
-            res.data 
-            ]
-        ))
-        .catch(err => setAppError(err.response.data.errMsg))
+    async function submitVote(vote, postId){
+        try {
+            const { data } = await userAxios.put(`/api/posts/${vote}/${postId}`)
+            await setPosts(prevState => [
+                ...prevState,
+                data 
+                ])
+            return data;
+        } catch(error) {
+            return setAppError(error);
+            // setAppError(err.response.data.errMsg)
+        }
     }
 
     // comments CRUD
@@ -114,9 +114,9 @@ export default function AppContextProvider({ children }){
             }))
             return data;
         } catch (error){
-            setAppError(error);
+            return setAppError(error);
+            // .catch(err => setAppError(err.response.data.errMsg))
         }
-        // .catch(err => setAppError(err.response.data.errMsg))
     };
 
     // POST comment
@@ -131,13 +131,14 @@ export default function AppContextProvider({ children }){
         }
     };
 
-    // DELETE comment ** check **
+    // DELETE comment
     async function deleteComment(postId, comId){
         try {
+            // remove comment association from post
             const { data } = await userAxios.put(`/api/comment/delete/${postId}/${comId}`)
-            // ** not updating comments upon delete **
-            // **fix: is this returning the amended comment array? **
-            return console.log(data.comment);
+            // delete comment model from DB
+            await userAxios.delete(`/api/comment/delete/${comId}`)
+            return data.comment;
         } catch (error) {
             return setAppError(error);
             // .catch(err => setAppError(err.response.data.errMsg))
@@ -153,17 +154,13 @@ export default function AppContextProvider({ children }){
         }
     }, [isLoading]);
 
-    // ** for testing **
-    // useEffect(() => {
-    //     console.log(posts);
-    //     console.log(isLoading);
-    // }, [posts]);
-
+    // **fix: setup with cookies **
     useEffect(() => {
         if(userState.token){
             getAllPosts();
             getUserPosts(user._id);
         }
+    // ** * * * **
         return () => {
             setPosts({
                 allPosts: [],
