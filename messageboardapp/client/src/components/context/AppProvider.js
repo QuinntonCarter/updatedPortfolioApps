@@ -28,7 +28,7 @@ export default function AppContextProvider({ children }){
             }));
             return data;
         } catch (error){
-            return setAppError(error);
+            return setAppError({ status: error.response.status, msg: error.response.statusText });
         }
     };
 
@@ -46,7 +46,7 @@ export default function AppContextProvider({ children }){
             }));
             return data
         } catch (error) {
-            return setAppError(error);
+            return setAppError({ status: error.response.status, msg: error.response.statusText });
         }
     };
 
@@ -61,7 +61,7 @@ export default function AppContextProvider({ children }){
             }));
             return data;
         } catch (error){
-            return setAppError(error);
+            return setAppError({ status: error.response.status, msg: error.response.statusText });
         }
     };
 
@@ -80,7 +80,7 @@ export default function AppContextProvider({ children }){
             });
             return data;
         } catch (error) {
-            return setAppError(error);
+            return setAppError({ status: error.response.status, msg: error.response.statusText });
         }
     }
 
@@ -94,8 +94,7 @@ export default function AppContextProvider({ children }){
                 ])
             return data;
         } catch(error) {
-            return setAppError(error);
-            // setAppError(err.response.data.errMsg)
+            return setAppError({ status: error.response.status, msg: error.response.statusText });
         }
     }
 
@@ -114,7 +113,7 @@ export default function AppContextProvider({ children }){
             }))
             return data;
         } catch (error){
-            return setAppError(error);
+            return setAppError({ status: error.response.status, msg: error.response.statusText });
             // .catch(err => setAppError(err.response.data.errMsg))
         }
     };
@@ -126,7 +125,7 @@ export default function AppContextProvider({ children }){
             const { data } = await userAxios.put(`/api/comment/${postId}`, newComment);
             return data.comment;
         } catch (error) {
-            return setAppError(error);
+            return setAppError({ status: error.response.status, msg: error.response.statusText });
             // .catch(err => setAppError(err.response.data.errMsg))
         }
     };
@@ -135,12 +134,12 @@ export default function AppContextProvider({ children }){
     async function deleteComment(postId, comId){
         try {
             // remove comment association from post
-            const { data } = await userAxios.put(`/api/comment/delete/${postId}/${comId}`)
+            const { data } = await userAxios.put(`/api/comment/deletezs/${postId}/${comId}`)
             // delete comment model from DB
-            await userAxios.delete(`/api/comment/delete/${comId}`)
+            await userAxios.delete(`/api/comment/deletesss/${comId}`)
             return data.comment;
         } catch (error) {
-            return setAppError(error);
+            return setAppError({ status: error.response.status, msg: error.response.statusText });
             // .catch(err => setAppError(err.response.data.errMsg))
         }
     };

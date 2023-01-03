@@ -43,7 +43,7 @@ export default function PostInteractionBar({
             [name]: value
         }))
     };
-    
+
     function voteValidation(vote, id){
         if (currentUserHasVoted) {
             setAppError(`Error: you've already voted here`)
@@ -54,7 +54,7 @@ export default function PostInteractionBar({
         }
     };
 
-    async function submitComment(e, postId) {
+    async function submitComment(e, postId){
         e.preventDefault();
         await postComment(postId, inputs)
             .then(data => setPostComments(data))

@@ -25,38 +25,45 @@ export default function UserProvider(props) {
     const [ userState, setUserState ] = useState(initState);
     const [ isLoading, setIsLoading ] = useState(true);
     // for auth
-    function signup(credentials) {
-        axios.post('/auth/signup', credentials)
-        .then(res => {
-            const {user, token} = res.data
+    async function signup(credentials) {
+        try {
+            const { 
+                data: { user, token }
+            } = await axios.post('/auth/signup', credentials)
+            // const { user, token } = data
             // **fix: setup with cookies **
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))
             // ** * * * **
-            setUserState(prevUserState => ({
+            await setUserState(prevUserState => ({
                 ...prevUserState,
                 user,
                 token
             }))
-        })
-        .catch(err => handleAuthError(err.response.data.errMsg))
+        } catch (error) {
+            throw new Error("Error with signup", { cause: error })
+        }
+        // .catch(err => handleAuthError(err.response.data.errMsg))
     };
 
-    function login(credentials) {
-        axios.post('/auth/login', credentials)
-            .then(res => {
-            const { user, token } = res.data
+    async function login(credentials) {
+        try {
+            const {
+                data: { user, token }
+            } = await axios.post('/auth/login', credentials)
             // **fix: setup with cookies **
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))
             // ** * * * **
-            setUserState(prevUserState => ({
+            await setUserState(prevUserState => ({
                 ...prevUserState,
                 user,
                 token
             }))
-        })
-        .catch(err => handleAuthError(err.response.data.errMsg))
+        } catch (error) {
+            throw new Error("", { cause: error })
+            // .catch(err => handleAuthError(err.response.data.errMsg))
+        }
     };
 
     function logout() {

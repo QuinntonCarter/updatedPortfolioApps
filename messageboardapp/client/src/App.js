@@ -47,7 +47,7 @@ function App() {
 
               <ProtectedRoute
               // OR statement is beta, may need to set ternary on PostDetails component
-                path={'/posts/:postId'||'/posts/:postId/comments'}
+                path={'/posts/:postId'}
                 component={PostDetails}
                 redirectTo='/'
                 token={token}

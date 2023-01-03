@@ -8,9 +8,9 @@ export default function Posts({
         userId,
         userString,
         votedUsers,
-        title, 
+        title,
         content, 
-        imgSrc, 
+        imgSrc,
         comment,
         posted,
         votes,
@@ -35,7 +35,8 @@ export default function Posts({
                     <div className='postDesc'>
                         <Link to={`/posts/${_id}`}
                             style={{color: 'rgb(55, 102, 255)', fontSize: '12px'}}>
-                            <h3> { title } <br/>
+                            <h3> { title }
+                                <br/>
                                 <span className='date'> {`>>${userString}`} on { posted.slice(0,10) } </span> 
                                 <span className='date'> @ { posted.slice(11,16) } </span> 
                             </h3>

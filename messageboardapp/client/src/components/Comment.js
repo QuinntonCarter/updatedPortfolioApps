@@ -2,42 +2,47 @@
 import { useContext } from "react";
 import { AppContext } from "./context/AppProvider";
 
-// only delete comment if authId and user._id match
 export default function Comment({
         date,
         content,
-        author,
+        comAuth,
         userIsAuthor,
         postId,
-        commentId,
-        setPostComments
+        _id,
+        setPostComments,
     }){
     const {
         deleteComment,
+        appError,
         setAppError
     } = useContext(AppContext);
 
-    async function validateDeletion(postId, commentId) {
+    async function validateDeletion(postId, commId) {
         if (userIsAuthor) {
-            await deleteComment(postId, commentId)
-                .then(data => setPostComments(data))
-                .catch(error => setAppError(error));
+            try {
+                await deleteComment(postId, commId)
+                    .then(data => setPostComments(data))
+                    .catch(error => setAppError(error));
+            } catch (error) {
+                setAppError({ status: error.response.status, msg: error.response.statusText })
+            }
         } else {
-            return setAppError(`Error: cannot delete, this isn't your comment`);
+            return setAppError({ status: '', msg: "Error: cannot delete, this isn't your comment" });
         }
     };
 
     const canDeleteComment = userIsAuthor &&
             <button
-                onClick={() => validateDeletion(postId, commentId)}
+                onClick={() => validateDeletion(postId, _id)}
                 className='deleteBtn'
             > Delete Comment </button>;
 
     return (
         <div className="comment" style={{ display: 'grid', justifySelf: 'center' }}>
-            <h5> {author} - {date} </h5>
-            <p> {content} </p>
-            {canDeleteComment}
+            <h5> { comAuth } - { date } </h5>
+            <p> { content } </p>
+            { canDeleteComment }
+            <h5> {appError && `${appError.status} ${appError.msg}`} </h5>
         </div>
     )
 };

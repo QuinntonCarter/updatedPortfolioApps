@@ -10,17 +10,14 @@ export default function CommentList({ comments, setPostComments, postId }){
     const commentsPresent = comments && comments.length;
     const canToggle = commentsPresent;
     const [ toggle, setToggle ] = useState(false);
-    const commTitle = comments ? `${comments.length} comments` : 'No comments posted';
+    const commTitle = `${comments ? comments.length : 'No'} comments`
 
     const commentsMapped = comments &&
         comments.map(comment =>
             <Comment
-                date={comment.date}
-                content={comment.content}
-                author={comment.comAuth}
+                {...comment}
                 userIsAuthor={comment._authId === user._id}
                 postId={postId}
-                commentId={comment._id}
                 setPostComments={setPostComments}
                 key={comment._id}
             />
