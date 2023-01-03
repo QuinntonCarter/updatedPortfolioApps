@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import styled from 'styled-components';
 
 import Layout from 'components/Layout';
 import Button from 'components/Button';
@@ -15,10 +14,6 @@ const layoutProps = {
   description: defaultDescription,
   keywords: defaultKeywords,
 };
-
-const Paragraph = styled.p.attrs({
-  className: 'main__description',
-})``;
 
 export const getServerSideProps = async () => {
   try {
@@ -47,11 +42,11 @@ const SsrPage = ({ randomPositiveInt }) => {
           <h1 className="main__title">
             This page was server-side rendered (SSR)!
           </h1>
-          <Paragraph>This is always built when requested.</Paragraph>
-          <Paragraph>
+          <p>This is always built when requested.</p>
+          <p>
             The button starts as if having been clicked {randomPositiveInt} time
             {randomPositiveInt === 1 ? '' : 's'}.
-          </Paragraph>
+          </p>
           <Button onClick={incrementCounter}>
             This button has been clicked {counter} time
             {counter === 1 ? '' : 's'}!
